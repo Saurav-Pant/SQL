@@ -41,6 +41,33 @@ app.post("/notes", (req, res) => {
   });
 });
 
+app.put("/notes/:id", (req, res) => {
+  const noteId = req.params.id;
+  const { title, desc } = req.body;
+
+  if (!title || !desc) {
+    return res.status(400).json({ error: "Title and desc are required" });
+  }
+
+  const q = "UPDATE learning.notes SET title = ?, `desc` = ? WHERE id = ?";
+  db.query(q, [title, desc, noteId], (err, data) => {
+    if (err) return res.json(err);
+
+    return res.json("Note has been updated successfully");
+  });
+});
+
+app.delete("/notes/:id", (req, res) => {
+  const noteId = req.params.id;
+
+  const q = "DELETE FROM learning.notes WHERE id = ?";
+  db.query(q, [noteId], (err, data) => {
+    if (err) return res.json(err);
+
+    return res.json("Note has been deleted successfully");
+  });
+});
+
 app.listen(8080, () => {
   console.log("Server listening on port 8080");
 });

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./App.css";
+import Notes from "./components/Notes"
 
 function App() {
   const [notesTitle, setNotesTitle] = useState("");
@@ -29,6 +29,8 @@ function App() {
 
   return (
     <div>
+      <Notes/>
+      <div className="NotesForm"> 
       <form onSubmit={handleSubmit}>
         <label htmlFor="notesTitle">Add Notes Title</label>
         <input
@@ -44,8 +46,9 @@ function App() {
           value={notesDesc}
           onChange={(e) => setNotesDesc(e.target.value)}
         />
-        <button type="submit">Submit</button>
+        <button type="submit" className="submit-btn">Submit</button>
       </form>
+      </div>
     </div>
   );
 }
