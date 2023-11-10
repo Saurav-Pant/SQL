@@ -33,7 +33,6 @@ const Notes: React.FC = () => {
   const handleUpdateNote = (noteId: number) => {
     setUpdateNoteId(noteId);
 
-    // Find the note to update
     const noteToUpdate = notes.find((note) => note.id === noteId);
     if (noteToUpdate) {
       setUpdateNoteTitle(noteToUpdate.title);
@@ -55,13 +54,11 @@ const Notes: React.FC = () => {
       });
 
       if (response.ok) {
-        // Update local state with the updated note
         const updatedNotes = notes.map((note) =>
           note.id === updateNoteId ? { ...note, title: updateNoteTitle, desc: updateNoteDesc } : note
         );
         setNotes(updatedNotes);
 
-        // Close the modal
         setUpdateNoteId(null);
       } else {
         console.error('Failed to update note');
@@ -78,7 +75,6 @@ const Notes: React.FC = () => {
       });
 
       if (response.ok) {
-        // Remove the deleted note from the local state
         const updatedNotes = notes.filter((note) => note.id !== noteId);
         setNotes(updatedNotes);
       } else {
@@ -100,7 +96,6 @@ const Notes: React.FC = () => {
         </div>
       ))}
 
-      {/* Update Note Modal */}
       {updateNoteId !== null && (
         <div className="modal">
           <div className="modal-content">

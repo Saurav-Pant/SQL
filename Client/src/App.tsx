@@ -19,6 +19,7 @@ function App() {
 
       if (response.ok) {
         console.log("Note added successfully");
+        window.location.reload();
       } else {
         console.error("Failed to add note");
       }

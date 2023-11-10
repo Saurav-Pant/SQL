@@ -45,10 +45,6 @@ app.put("/notes/:id", (req, res) => {
   const noteId = req.params.id;
   const { title, desc } = req.body;
 
-  if (!title || !desc) {
-    return res.status(400).json({ error: "Title and desc are required" });
-  }
-
   const q = "UPDATE learning.notes SET title = ?, `desc` = ? WHERE id = ?";
   db.query(q, [title, desc, noteId], (err, data) => {
     if (err) return res.json(err);
